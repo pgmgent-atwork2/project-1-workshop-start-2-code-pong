@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content= "width=device-width, initial-scale=1.0">
-        <title>PONG GAME</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PONG GAME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
 
-    <body>
-        <h1>Pong game</h1>
-        <div class="board">
-            <div class='ball'>
-                <div class="ball_effect"></div>
-            </div>
-            <div class="paddle_1 paddle"></div>
-            <div class="paddle_2  paddle"></div>
-            <h1 class="player_1_score">0</h1>
-            <h1 class="player_2_score">0</h1>
-            <h1 class="message"> 
-            Press Enter to play 
+<body>
+    <header class="main">
+        <div class="main-child">
+            <h1>Welcome to pong</h1>
+        </div class="main-child">
+        <div>
+            <h1>
+            <a href="./Instructions.html">Instructions</a>
         </h1>
         </div>
+    </header>
 
-        <script src="./main.js"></script>
-    </body>
+    <div class="board">
+        <div class='ball'>
+            <div class="ball_effect"></div>
+        </div>
+        <div class="paddle_1 paddle"></div>
+        <div class="paddle_2  paddle"></div>
+        <h1 class="player_1_score">0</h1>
+        <h1 class="player_2_score">0</h1>
+        <h1 class="message">
+            Press Enter to play
+        </h1>
+    </div>
+    <script src="./main.js"></script>
+</body>
 
 </html>

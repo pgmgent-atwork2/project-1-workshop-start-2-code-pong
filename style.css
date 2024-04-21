@@ -5,13 +5,18 @@
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
-  flex-direction: column;
+  background-color: red;
+  background-image: linear-gradient(to bottom right, hsl(0, 100%, 50%), hsl(60, 100%, 50%));
+  background-repeat: no-repeat;
+  max-width: 77rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
 }
 
 .board {
