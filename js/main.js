@@ -10,7 +10,7 @@ let boardWidth = tileSize * columns;
 let boardHeight = tileSize * rows;
 let context;
 
-//vvariabelen voor het ruimteschip
+// variabelen voor het ruimteschip
 let shipWidth = tileSize * 2;
 let shipHeight = tileSize;
 let shipX = (tileSize * columns) / 2 - tileSize;
@@ -26,6 +26,7 @@ let ship = {
 
 // Definieer variabelen voor het ruimteschipafbeelding en de snelheid van het ruimteschip
 let shipImg;
+// schip zal 1 "tilesize" verschuiven bij het drukken van een pijltjestoets
 let shipVelocityX = tileSize;
 
 // Definieer variabelen voor de aliens
@@ -55,7 +56,7 @@ let score = 0;
 let gameOver = false;
 
 // Functie die wordt uitgevoerd wanneer de pagina is geladen
-window.onload = function () {
+function start() {
   // Vind het speelbord en stel de grootte ervan in
   board = document.getElementById("board");
   board.width = boardWidth;
@@ -83,7 +84,9 @@ window.onload = function () {
   document.addEventListener("keydown", moveShip);
   // key up om ervoor te zorgen dat je de spatiebalk niet ingedrukt kan houden
   document.addEventListener("keyup", shoot);
-};
+}
+
+start();
 
 // Functie voor het updaten van de gamestatus en het tekenen van het speelbord
 function update() {

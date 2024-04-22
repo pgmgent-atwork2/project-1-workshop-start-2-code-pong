@@ -1,0 +1,64 @@
+body {
+  background-image: url(/img/instructions-img/pexels-francesco-ungaro-998641.jpg);
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+p {
+  color: white;
+  margin: 3rem 0;
+}
+
+h2 {
+  margin: 3rem 0;
+}
+
+.link {
+  color: red;
+}
+
+strong {
+  color: yellow;
+}
+
+/* Header */
+
+h1 {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header__container {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__title {
+  text-decoration: none;
+  color: white;
+}
+
+/* main */
+
+.main-content {
+  background-color: rgb(68, 67, 67);
+  margin: 5rem 10rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.download {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  border-style: none;
+  border-radius: 0.5rem;
+}
+
+.main-image {
+  margin: 0 auto;
+}

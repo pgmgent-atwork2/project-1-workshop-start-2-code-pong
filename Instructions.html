@@ -1,24 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Pong|Instructions</title>
-</head>
-<body>
-    <header class="main">
-        
-    </header>
-    <header class="main">
-        <div class="main-child">
-            <h1>Instructions</h1>
-        </div class="main-child">
-        <div>
-            <h1>
-            <a href="./index.html">Home</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/tutorial.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css"
+    />
+    <title>Space invaders|Instructions</title>
+  </head>
+  <body>
+    <header>
+      <div class="header__container">
+        <h1>
+          <a class="header__title" href="/Instructions.html">Space Invaders</a>
         </h1>
-        </div>
+      </div>
     </header>
-</body>
+
+    <main>
+      <div class="main-content">
+        <p>
+          We gaan een simpele game maken genaamd "Space Invaders". Het doel van
+          het spel is om met de pijltjes op je toetsenbord je ruimteschip van
+          links naar rechts te bewegen en doormiddel van de spatiebalk kogels af
+          te schieten naar de aliens om deze te verslaan.
+        </p>
+
+        <img
+          class="main-image"
+          src="/img/code-snippets/screenshot-game.png"
+          alt=""
+        />
+
+        <p>Hier hebben we 3 codeertalen voor nodig, namelijk</p>
+
+        <ul>
+          <li>CSS</li>
+          <li>HTML</li>
+          <li>Javascript</li>
+        </ul>
+
+        <h2>STAP 1 - Mappenstructuur</h2>
+
+        <p>
+          We hebben een code-editor nodig. In de workshop gebruiken we
+          <a class="link" href="https://code.visualstudio.com/"
+            >Visual studio code</a
+          >.
+        </p>
+
+        <h3>1.1 Download de bronbestanden</h3>
+        <button class="download">
+          <a class="link" href="/bronbestand.zip">Download</a>
+        </button>
+
+        <img src="img/code-snippets/download-bron.png" alt="" />
+
+        <p>Unzip het bestand en plaats dit bestand dan op je bureaublad.</p>
+
+        <h3>1.2 bestand openen in VS code</h3>
+
+        <p>
+          <strong>Sleep</strong> het bestand van op je bureaublad naar het VS
+          code logo dat ook op je bureaublad staat.
+        </p>
+        <img src="img/code-snippets/bronbestand-slepen.png" alt="" />
+
+        <p>Je zou nu deze mappenstructuur in vs code moeten zien.</p>
+
+        <img src="img/code-snippets/mappenstructuur.png" alt="" />
+
+        <p>
+          Alle bestanden zouden leeg moeten zijn behalve de
+          <strong>reset.css</strong> file en in de map
+          <strong>img</strong> zouden 2 afbeeldingen moeten zitten, namelijk
+          <strong>alien.png</strong> en <strong>ship.png</strong>.
+        </p>
+
+        <h3>1.3 Installeer "live-server" extensie</h3>
+
+        <p>
+          Ga naar extensies (links op vs code) en zoek naar de extensie
+          <strong>live-server</strong>.
+        </p>
+
+        <img src="img/code-snippets/live-server.png" alt="" />
+
+        <p>
+          Klik nu rechts onderaan op <strong>Go Live</strong>. Een blanco pagina
+          zou nu moeten openen.
+        </p>
+
+        <img src="img/code-snippets/live-server-click.png" alt="" />
+
+        <h2>STAP 2 - HTML & CSS</h2>
+        <h3>2.1 HTML</h3>
+        <p>
+          Ga naar je <strong>index.html</strong> file en plak onderstaande code
+          hierin en <strong>bewaar</strong> dit bestand.
+        </p>
+
+        <pre>
+            <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang=&quot;en&quot;&gt;
+                  &lt;head&gt;
+                    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+                    &lt;title&gt;Space invaders&lt;/title&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/reset.css&quot; /&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/main.css&quot; /&gt;
+                  &lt;/head&gt;
+                  &lt;body&gt;
+                    &lt;header&gt;&lt;/header&gt;
+                    &lt;main&gt;
+                      &lt;h1&gt;Space Invaders&lt;/h1&gt;
+                      &lt;canvas id=&quot;board&quot;&gt;
+                       
+                      &lt;/canvas&gt;
+                      
+                    &lt;/main&gt;
+                    &lt;footer&gt;&lt;/footer&gt;
+                
+                    &lt;script src=&quot;/js/main.js&quot;&gt;&lt;/script&gt;
+                  &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+
+        <p>
+          Je zou nu dit moeten zien op de pagina die je hebt geopend via
+          <strong>live server</strong>
+        </p>
+
+        <img src="img/code-snippets/add-html.png" alt="" />
+
+        <h3>2.2 CSS</h3>
+
+        <p>
+          We gaan nu onze <strong>css</strong> toevoegen. Dit zal ervoor zorgen
+          dat ons <strong>speelbord</strong> zichtbaar wordt en onze titel in
+          het midden staat.
+        </p>
+        <p>
+          Ga in vs code naar je <strong>css folder</strong> en open
+          <strong>main.css</strong> en plak onderstaande code hierin en
+          <strong>bewaar dit bestand</strong>.
+        </p>
+
+        <pre>
+            <code>
+                body {
+                    text-align: center;
+                    font-family: &quot;Roboto&quot;, sans-serif;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
+                  
+                  #board {
+                    background-color: black;
+                  }
+                  
+            </code>
+        </pre>
+
+        <p>Je zou nu dit moeten zien in je browser.</p>
+        <img src="img/code-snippets/add-css.png" alt="" />
+
+        <p>
+          Als je wil kan je nu de <strong>kleur</strong> van je bord veranderen.
+          Doe dit door de <strong>background-color</strong> te veranderen van
+          het <strong>#board</strong>
+        </p>
+
+        <p>
+          Bijvoorbeeld, we veranderen de kleur van het bord naar
+          <strong>rood</strong>.
+        </p>
+
+        <img src="img/code-snippets/red-back.png" alt="" />
+        <img src="img/code-snippets/red-back-2.png" alt="" />
+
+        <h2>STAP-3 Javascript</h2>
+
+        <h3>3.1 Tekenen van het speelbord</h3>
+
+        <p>
+          We gaan beginnen met het bepalen van de <strong>grootte</strong> van
+          ons <strong>speelbord.</strong>
+        </p>
+
+        <pre>
+            <code>
+// de grootte van een tegel en het aantal rijen en kolommen op het speelbord
+// tegelgrootte is in dit geval 32px
+let tileSize = 32;
+let rows = 16;
+let columns = 16;
+
+// variabelen voor het speelbord en de grootte ervan
+let board;
+let boardWidth = tileSize * columns;
+let boardHeight = tileSize * rows;
+let context;
+
+            </code>
+        </pre>
+
+        <p>
+          In dit geval is ons speelbord verdeeld in
+          <strong>16 rijen en 16 kolommen</strong>. 1 vakje is 32 pixels groot.
+          dus 1 kolom en 1 rij zijn <strong>16 x 32 = 512 pixels</strong> groot
+        </p>
+
+        <p>
+          In het volgende stuk gaan we gebruik maken van een
+          <strong>functie</strong> (Uitleg hiervan wordt in de workshop
+          gegeven).
+        </p>
+        <p>
+          <strong>Onder onze variabelen</strong> plaatsen we deze functie en
+          roepen we hem ook direct op.
+        </p>
+
+        <pre>
+            <code>
+                function start() {
+                    // Vind het speelbord en stel de grootte ervan in
+                    board = document.getElementById("board");
+                    board.width = boardWidth;
+                    board.height = boardHeight;
+                    context = board.getContext("2d");
+                  }
+                  
+                  start();
+                  
+            </code>
+        </pre>
+
+        <p>
+          Deze functie zal ervoor zorgen dat het
+          <strong>speelbord getekend</strong> wordt.
+        </p>
+
+        <p>Je gaat nu in de <strong>browser</strong> dit op je scherm zien.</p>
+        <img src="img/code-snippets/empty-board.png" alt="" />
+
+        <p>Proficiat! Het speelbord is getekend! Op naar de volgende stap!</p>
+
+        <h3>3.2 Tekenen van het schip</h3>
+
+        <p>
+          <strong>Onder de variabelen</strong> van het speelbord,
+          <strong>bepalen we de variabelen</strong> van ons ruimteschip.
+        </p>
+
+        <pre>
+            <code>
+// variabelen voor het ruimteschip
+let shipWidth = tileSize * 2;
+let shipHeight = tileSize;
+let shipX = (tileSize * columns) / 2 - tileSize;
+let shipY = tileSize * rows - tileSize * 2;
+
+// het ruimteschip object met positie en grootte
+let ship = {
+  x: shipX,
+  y: shipY,
+  width: shipWidth,
+  height: shipHeight,
+};
+
+// Definieer variabelen voor het ruimteschipafbeelding en de snelheid van het ruimteschip
+let shipImg;
+// schip zal 1 "tilesize" verschuiven bij het drukken van een pijltjestoets
+let shipVelocityX = tileSize;
+            </code>
+        </pre>
+
+        <p>
+          Nu dat de variabelen van ons schip er in staan, moeten we net zoals
+          ons speelbord het <strong>schip tekenen</strong>
+        </p>
+
+        <p>
+          We voegen onder onze al bestaande code in de start functie deze code
+          toe. onze start functie ziet er nu zo uit.
+        </p>
+
+        <pre>
+            <code>
+                function start() {
+                    // Vind het speelbord en stel de grootte ervan in
+                    board = document.getElementById("board");
+                    board.width = boardWidth;
+                    board.height = boardHeight;
+                    context = board.getContext("2d");
+                  
+                    // Laad afbeeldingen van het ruimteschip en aliens
+                    shipImg = new Image();
+                    shipImg.src = "/img/ship.png";
+                    shipImg.onload = function () {
+                      // Tekenen van het ruimteschip
+                      context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+                    };
+                  }
+            </code>
+        </pre>
+
+        <p>Je ziet nu dit in de browser.</p>
+        <img src="img/code-snippets/board-with-ship.png" alt="" />
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
 </html>
