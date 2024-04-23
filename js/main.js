@@ -75,7 +75,7 @@ function start() {
   alienImg.src = "/img/alien.png";
 
   // Creëer een groep aliens
-  creatAliens();
+  createAliens();
 
   // Start de game loop
   requestAnimationFrame(update);
@@ -159,7 +159,7 @@ function update() {
     alienVelocityX += 0.2;
     alienArray = [];
     bulletArray = [];
-    creatAliens();
+    createAliens();
   }
 
   // Tekenen van de score
@@ -184,7 +184,7 @@ function moveShip(e) {
 }
 
 // Functie voor het creëren van een nieuwe groep aliens
-function creatAliens() {
+function createAliens() {
   for (let c = 0; c < alienColumns; c++) {
     for (let r = 0; r < alienRows; r++) {
       let alien = {

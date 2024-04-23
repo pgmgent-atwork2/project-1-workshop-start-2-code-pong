@@ -320,6 +320,502 @@ let shipVelocityX = tileSize;
 
         <p>Je ziet nu dit in de browser.</p>
         <img src="img/code-snippets/board-with-ship.png" alt="" />
+
+        <h3>3.3 Bewegen van het schip</h3>
+
+        <p>
+          Om het schip te laten <strong>bewegen</strong> schrijven we een
+          <strong>nieuwe functie</strong> genaamd <strong>moveShip</strong>
+        </p>
+        .
+        <pre>
+          <code>
+            function moveShip(e) {
+              if (e.code == "ArrowLeft" && ship.x - shipVelocityX >= 0) {
+                ship.x -= shipVelocityX;
+              } else if (
+                e.code == "ArrowRight" &&
+                ship.x + shipVelocityX + ship.width <= board.width
+              ) {
+                ship.x += shipVelocityX;
+              }
+            }
+          </code>
+        </pre>
+
+        <p>
+          de <strong>e tussen haakjes</strong> is een afkorting voor event. Dus
+          als de <strong>event code</strong> gelijk is aan
+          <strong>ArrowLeft</strong> dan zal het schip naar links bewegen en
+          voor rechts gebruiken we dezelfde logica.
+        </p>
+
+        <p>
+          Als je het schip beweegt moet de browser updaten. Hiervoor schrijven
+          we een nieuwe functie genaamd <strong>update</strong>. Deze mag onder
+          de moveShip functie.
+        </p>
+
+        <pre>
+          <code>
+            function update() {
+              // Vraag de browser om een nieuwe frame te tekenen
+              requestAnimationFrame(update);
+            
+              // Wis het vorige frame van het speelbord
+              context.clearRect(0, 0, board.width, board.height);
+            
+              // Tekenen van het ruimteschip
+              context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+            }
+          </code>
+        </pre>
+
+        <p>
+          In onze <strong>start</strong> functie plaatsen we nog
+          <strong>extra</strong> code helemaal onderaan de functie.
+        </p>
+
+        <pre>
+          <code>
+            function start() {
+              // Vind het speelbord en stel de grootte ervan in
+              board = document.getElementById("board");
+              board.width = boardWidth;
+              board.height = boardHeight;
+              context = board.getContext("2d");
+            
+              // Laad afbeeldingen van het ruimteschip en aliens
+              shipImg = new Image();
+              shipImg.src = "/img/ship.png";
+              shipImg.onload = function () {
+                // Tekenen van het ruimteschip
+                context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+              };
+            
+              // Start de game loop
+              requestAnimationFrame(update);
+            
+              // Luister naar toetsaanslagen voor beweging van het ruimteschip en schieten
+              document.addEventListener("keydown", moveShip);
+            }
+          </code>
+        </pre>
+        <p>
+          We zien dat we hierbij een <strong>eventlistener</strong> toevoegen.
+          Dit zorgt ervoor dat we gaan luisteren naar een
+          <strong>keydown</strong> en wanneer deze de
+          <strong>linkse of rechtse pijltjestoets</strong> is dan zal de browser
+          hiernaar luisteren en het schip bewegen.
+        </p>
+
+        <p><strong>EXTRA</strong></p>
+
+        <p>
+          Probeer eens deze lijn code te verwijderen in de
+          <strong>update functie</strong>. Wat gebeurt er dan?
+        </p>
+
+        <pre>
+          <code>
+            context.clearRect(0, 0, board.width, board.height);
+          </code>
+        </pre>
+
+        <h3>3.4 Toevoegen van aliens</h3>
+
+        <p>
+          We beginnen met het toevoegen van onze variabelen van onze aliens. Je
+          mag deze toevoegen onder die van het schip.
+        </p>
+
+        <pre>
+          <code>
+// Definieer variabelen voor de aliens
+let alienArray = [];
+let alienWidth = tileSize * 2;
+let alienHeight = tileSize * 1;
+
+// Startcoördinaten voor aliens
+let alienX = tileSize;
+let alienY = tileSize;
+
+// Variabelen voor afbeeldingen en kenmerken van aliens
+let alienImg;
+let alienRows = 2;
+let alienColumns = 3;
+let alienCount = 0;
+
+// Snelheid van de aliens
+let alienVelocityX = 1;
+          </code>
+        </pre>
+
+        <p>
+          Nu onze variabelen gekend zijn maken we nu terug een
+          <strong>functie</strong> genaamd <strong>createAliens</strong> die
+          onze aliens zal maken. Deze mag helemaal onderaan toegevoegd worden.
+        </p>
+
+        <pre>
+          <code>
+            function createAliens() {
+              for (let c = 0; c < alienColumns; c++) {
+                for (let r = 0; r < alienRows; r++) {
+                  let alien = {
+                    img: alienImg,
+                    x: alienX + c * alienWidth,
+                    y: alienY + r * alienHeight,
+                    width: alienWidth,
+                    height: alienHeight,
+                    alive: true,
+                  };
+                  alienArray.push(alien);
+                }
+              }
+              alienCount = alienArray.length;
+            }
+          </code>
+        </pre>
+
+        <p>
+          Nu gaan we terug onze <strong>start functie</strong> aanpassen. We
+          voegen onze <strong>createAliens functie</strong> en onze img voor de
+          aliens toe.
+        </p>
+
+        <pre>
+          <code>
+            function start() {
+              // Vind het speelbord en stel de grootte ervan in
+              board = document.getElementById("board");
+              board.width = boardWidth;
+              board.height = boardHeight;
+              context = board.getContext("2d");
+            
+              // Laad afbeeldingen van het ruimteschip en aliens
+              shipImg = new Image();
+              shipImg.src = "/img/ship.png";
+              shipImg.onload = function () {
+                // Tekenen van het ruimteschip
+                context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+              };
+              alienImg = new Image();
+              alienImg.src = "/img/alien.png";
+            
+              // Creëer een groep aliens
+              createAliens();
+              // Start de game loop
+              requestAnimationFrame(update);
+            
+              // Luister naar toetsaanslagen voor beweging van het ruimteschip en schieten
+              document.addEventListener("keydown", moveShip);
+            }
+          </code>
+        </pre>
+
+        <p>
+          Nu updaten we onze <strong>update functie</strong>. We voegen dit stuk
+          code toe helemaal onderin de functie. Dit staat dus
+          <strong>IN</strong> de functie.
+        </p>
+
+        <pre>
+          <code>
+            for (let i = 0; i < alienArray.length; i++) {
+              let alien = alienArray[i];
+              if (alien.alive) {
+                // Bewegen van aliens en detecteren van aanraken rand van bord
+                alien.x += alienVelocityX;
+                if (alien.x + alien.width >= board.width || alien.x <= 0) {
+                  alienVelocityX *= -1;
+                  alien.x += alienVelocityX * 2;
+                  // Verplaats de aliens naar beneden als ze de zijkant raken
+                  for (let j = 0; j < alienArray.length; j++) {
+                    alienArray[j].y += alienHeight;
+                  }
+                }
+                // Tekenen van de alien
+                context.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
+                // Controleer of aliens het ruimteschip raken
+                if (alien.y >= ship.y) {
+                  gameOver = true;
+                }
+              }
+            }
+          </code>
+        </pre>
+
+        <p>Ga nu terug naar de browser en nu zie je normaal dit scherm.</p>
+
+        <img src="img/code-snippets/add-aliens.png" alt="" />
+
+        <p>
+          Je ziet nu de aliens van links naar rechts bewegen en elke keer ze de
+          rand raken schuiven ze 1 rij naar beneden.
+        </p>
+
+        <h3>3.5 kogels pew pew</h3>
+
+        <p>Nu is het tijd om de <strong>kogels</strong> toe te voegen.</p>
+
+        <p>
+          Voeg onder de <strong>alien variabelen</strong> de variabelen voor de
+          kogels toe.
+        </p>
+
+        <pre>
+          <code>
+// Variabelen voor kogels
+let bulletArray = [];
+let bulletVelocityY = -10;
+          </code>
+        </pre>
+
+        <p>
+          De volgende stap is onze <strong>shoot functie</strong> en
+          <strong>detectCollision functie</strong> toe te voegen.
+        </p>
+
+        <p>Doe dit helemaal onderaan.</p>
+
+        <pre>
+          <code>
+            function shoot(e) {
+              if (gameOver) {
+                return;
+              }
+              if (e.code == "Space") {
+                let bullet = {
+                  x: ship.x + (shipWidth * 15) / 32,
+                  y: ship.y,
+                  width: tileSize / 8,
+                  height: tileSize / 2,
+                  used: false,
+                };
+                bulletArray.push(bullet);
+              }
+            }
+            
+            // Functie voor het detecteren van botsingen tussen objecten
+            function detectCollision(a, b) {
+              return (
+                a.x < b.x + b.width &&
+                a.x + a.width > b.x &&
+                a.y < b.y + b.height &&
+                a.y + a.height > b.y
+              );
+            }
+          </code>
+        </pre>
+
+        <p>
+          Voeg nu in de start functie helemaal onderaan onder de
+          <strong>eventlistener</strong> deze code toe.
+        </p>
+
+        <pre>
+          <code>
+            // Luister naar toetsaanslagen voor beweging van het ruimteschip en schieten
+            document.addEventListener("keydown", moveShip);
+            // key up om ervoor te zorgen dat je de spatiebalk niet ingedrukt kan houden
+            document.addEventListener("keyup", shoot);
+          </code>
+        </pre>
+
+        <p>
+          helemaal onderaan de <strong>update functie</strong> zetten we deze
+          code
+        </p>
+
+        <pre>
+          <code>
+  // Tekenen van de kogels en detecteren van botsingen met aliens
+  for (let i = 0; i < bulletArray.length; i++) {
+    let bullet = bulletArray[i];
+    bullet.y += bulletVelocityY;
+    context.fillStyle = "white";
+    context.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+    for (let j = 0; j < alienArray.length; j++) {
+      let alien = alienArray[j];
+      if (!bullet.used && alien.alive && detectCollision(bullet, alien)) {
+        bullet.used = true;
+        alien.alive = false;
+        alienCount--;
+        score += 100;
+      }
+    }
+  }
+
+  // Opruimen van gebruikte kogels
+  while (
+    bulletArray.length > 0 &&
+    (bulletArray[0].used || bulletArray[0].y < 0)
+  ) {
+    bulletArray.shift();
+  }
+          </code>
+        </pre>
+
+        <p>
+          Normaal zou je nu kogels kunnen schieten EN zouden de aliens moeten
+          verslagen worden wanneer ze geraakt worden.
+        </p>
+
+        <h3>3.6 Alle aliens zijn dood... Wat nu?</h3>
+
+        <p>
+          Hoera! Alle aliens zijn dood... maar je wilt natuurlijk wel verder
+          spelen.
+        </p>
+
+        <p>
+          Voeg deze code toe aan op het einde van je
+          <strong>update functie</strong>
+        </p>
+
+        <pre>
+          <code>
+  // Start een nieuw level als alle aliens zijn verslagen
+  if (alienCount == 0) {
+    alienColumns = Math.min(alienColumns + 1, columns / 2 - 2);
+    alienRows = Math.min(alienRows + 1, rows - 4);
+    alienVelocityX += 0.2;
+    alienArray = [];
+    bulletArray = [];
+    createAliens();
+  }
+          </code>
+        </pre>
+
+        <p>
+          Dit zal ervoor zorgen dat er een nieuw <strong>EN</strong> moeilijker
+          level zal starten wanneer alle aliens dood zijn.
+        </p>
+
+        <h3>3.7 Game Over :(</h3>
+
+        <p>
+          De aliens zijn na een tijd te sterk geworden en hebben je schip
+          bereikt.
+        </p>
+        <p>Normaal zou het dan nu <strong>Game Over</strong> moeten zijn.</p>
+
+        <p>Voeg deze variabele toe onder alle andere variabalen</p>
+
+        <pre>
+          <code>
+            let gameOver = false;
+          </code>
+        </pre>
+        <p>
+          Voeg onder de <strong>requestAnimationFrame(update)</strong> in de
+          <strong>update functie</strong> dit stuk code toe.
+        </p>
+
+        <pre>
+          <code>
+  // Vraag de browser om een nieuwe frame te tekenen
+  requestAnimationFrame(update);
+
+  // Stop de update als het spel voorbij is
+  if (gameOver) {
+    return;
+  }
+          </code>
+        </pre>
+
+        <p>
+          En voeg helemaal onderaan de <strong>update functie</strong> dit stuk
+          code toe.
+        </p>
+
+        <pre>
+          <code>
+       // Controleer of aliens het ruimteschip raken
+      if (alien.y >= ship.y) {
+        gameOver = true;
+      }
+          </code>
+        </pre>
+
+        <p>
+          Nu gaan we onze <strong>moveShip functie</strong> bewerken naar dit.
+        </p>
+
+        <pre>
+          <code>
+            function moveShip(e) {
+              if (gameOver) {
+                return;
+              }
+              if (e.code == "ArrowLeft" && ship.x - shipVelocityX >= 0) {
+                ship.x -= shipVelocityX;
+              } else if (
+                e.code == "ArrowRight" &&
+                ship.x + shipVelocityX + ship.width <= board.width
+              ) {
+                ship.x += shipVelocityX;
+              }
+            }
+          </code>
+        </pre>
+
+        <p>En de <strong>shoot functie</strong> naar dit</p>
+
+        <pre>
+          <code>
+            function shoot(e) {
+              if (gameOver) {
+                return;
+              }
+              if (e.code == "Space") {
+                let bullet = {
+                  x: ship.x + (shipWidth * 15) / 32,
+                  y: ship.y,
+                  width: tileSize / 8,
+                  height: tileSize / 2,
+                  used: false,
+                };
+                bulletArray.push(bullet);
+              }
+            }
+          </code>
+        </pre>
+
+        <h3>3.8 Score</h3>
+
+        <p>
+          Natuurlijk zou je ook graag een score willen bijhouden voor als je je
+          record wilt verbreken of tegen je vrienden speelt.
+        </p>
+
+        <p>
+          Voeg eerst een variabele <strong>score</strong> toe om daarin je score
+          in op te slaan.
+        </p>
+
+        <p>Voeg dit toe onderaan al je andere variabalen</p>
+
+        <pre>
+          <code>
+            let score = 0;
+          </code>
+        </pre>
+        <p>
+          En als laatste voegen we deze code toe aan het einde van de
+          <strong>update functie</strong>
+        </p>
+
+        <pre>
+          <code>
+            context.fillStyle = "white";
+            context.font = "16px courier";
+            context.fillText(score, 5, 20);
+          </code>
+        </pre>
+
+        <p>HOERAAAAA!!! het spel is af!</p>
       </div>
     </main>
 
