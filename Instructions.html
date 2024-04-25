@@ -727,16 +727,35 @@ let bulletVelocityY = -10;
         </pre>
 
         <p>
-          En voeg helemaal onderaan de <strong>update functie</strong> dit stuk
-          code toe.
+          Pas nu de for loop aan in de update functie voor het tekenen van de
+          aliens naar dit.
         </p>
 
         <pre>
           <code>
-       // Controleer of aliens het ruimteschip raken
-      if (alien.y >= ship.y) {
-        gameOver = true;
-      }
+            // Tekenen van de aliens
+            for (let i = 0; i < alienArray.length; i++) {
+              let alien = alienArray[i];
+              if (alien.alive) {
+                // Bewegen van aliens en detecteren van aanraken rand van bord
+                alien.x += alienVelocityX;
+                if (alien.x + alien.width >= board.width || alien.x <= 0) {
+                  alienVelocityX *= -1;
+                  alien.x += alienVelocityX * 2;
+                  // Verplaats de aliens naar beneden als ze de zijkant raken
+                  for (let j = 0; j < alienArray.length; j++) {
+                    alienArray[j].y += alienHeight;
+                  }
+                }
+                // Tekenen van de alien
+                context.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
+                // Controleer of aliens het ruimteschip raken
+                if (alien.y >= ship.y) {
+                  gameOver = true;
+                }
+              }
+            }
+      
           </code>
         </pre>
 
