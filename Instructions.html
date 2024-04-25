@@ -195,6 +195,8 @@
 
         <h3>3.1 Tekenen van het speelbord</h3>
 
+        <p>Vanaf nu werken we alleen nog maar in de <strong>main.js</strong> file.</p>
+
         <p>
           We gaan beginnen met het bepalen van de <strong>grootte</strong> van
           ons <strong>speelbord.</strong>
@@ -538,9 +540,7 @@ let alienVelocityX = 1;
                 // Tekenen van de alien
                 context.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
                 // Controleer of aliens het ruimteschip raken
-                if (alien.y >= ship.y) {
-                  gameOver = true;
-                }
+                
               }
             }
           </code>
@@ -582,9 +582,7 @@ let bulletVelocityY = -10;
         <pre>
           <code>
             function shoot(e) {
-              if (gameOver) {
-                return;
-              }
+              
               if (e.code == "Space") {
                 let bullet = {
                   x: ship.x + (shipWidth * 15) / 32,
