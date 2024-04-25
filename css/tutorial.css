@@ -45,10 +45,14 @@ h1 {
 /* main */
 
 .main-content {
-  background-color: rgb(68, 67, 67);
+  background: #bdc3c7;  
+  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+  background: linear-gradient(to right, #2c3e50, #8d8d8d);
   margin: 5rem 10rem;
   padding: 1rem;
   border-radius: 1rem;
+  max-width: 50rem;
+  margin: 0 auto;
 }
 
 @media (max-width: 750px) {
@@ -56,6 +60,14 @@ h1 {
     margin: 5rem 0;
   }
 }
+
+.list__item {
+  &::marker {
+      content: "👽";
+      color: red;
+  }
+}
+
 
 .download {
   margin: 1rem 0;
