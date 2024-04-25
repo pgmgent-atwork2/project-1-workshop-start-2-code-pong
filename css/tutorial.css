@@ -51,6 +51,12 @@ h1 {
   border-radius: 1rem;
 }
 
+@media (max-width: 750px) {
+  .main-content {
+    margin: 5rem 0;
+  }
+}
+
 .download {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
