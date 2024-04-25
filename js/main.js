@@ -65,14 +65,14 @@ function start() {
 
   // Laad afbeeldingen van het ruimteschip en aliens
   shipImg = new Image();
-  shipImg.src = "/img/ship.png";
+  shipImg.src = "img/ship.png";
   shipImg.onload = function () {
     // Tekenen van het ruimteschip
     context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
   };
 
   alienImg = new Image();
-  alienImg.src = "/img/alien.png";
+  alienImg.src = "img/alien.png";
 
   // Creëer een groep aliens
   createAliens();
