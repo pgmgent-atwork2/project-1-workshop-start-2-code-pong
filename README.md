@@ -8,3 +8,9 @@ In dit project is het de bedoeling dat je een eigen versie van het spel space in
 - Bij het verslaan van alle vijanden verschijnt ga je naar het volgende level.
 - Het spel heeft meerdere levels.
 
+Het is de bedoeling dat de cursist al een basis uitleg geeft, namelijk
+
+- Wat variabelen zijn
+- Wat functies zijn
+- Wat html,css en js zijn (basis)
+
