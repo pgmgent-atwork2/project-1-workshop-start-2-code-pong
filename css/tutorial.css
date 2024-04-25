@@ -57,6 +57,14 @@ h1 {
   }
 }
 
+.list__item {
+  &::marker {
+      content: "👽";
+      color: red;
+  }
+}
+
+
 .download {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
